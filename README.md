@@ -1,2 +1,7 @@
 # website-Terrareactor
-Duplicate of website-Beta with a basic landing page
+
+A basic landing page project based on the previous website-Beta work.
+
+## Run locally
+
+Open `index.html` in a browser.

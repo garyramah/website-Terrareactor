@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terrareactor</title>
+    <style>
+      :root {
+        --bg: #07130f;
+        --bg-soft: #0d1f1a;
+        --card: rgba(18, 30, 28, 0.9);
+        --card-border: rgba(124, 255, 214, 0.18);
+        --text: #edfdf7;
+        --muted: #b5d8ce;
+        --primary: #62f7bb;
+        --primary-strong: #1fe0a7;
+        --accent: #a7f3d0;
+        --shadow: rgba(19, 186, 117, 0.25);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: radial-gradient(circle at top, rgba(65, 201, 131, 0.15), transparent 35%), var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: min(1100px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 22px 0 12px;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 18px 22px;
+        border: 1px solid var(--card-border);
+        border-radius: 18px;
+        background: rgba(11, 22, 18, 0.8);
+        backdrop-filter: blur(12px);
+      }
+
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+      }
+
+      .brand span {
+        color: var(--primary);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 22px;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .nav-links a:hover { color: var(--text); }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+        color: #032214;
+        box-shadow: 0 10px 30px var(--shadow);
+      }
+
+      .hero {
+        padding: 72px 0 42px;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(98, 247, 187, 0.08);
+        color: var(--accent);
+        border: 1px solid rgba(98, 247, 187, 0.2);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 12px var(--primary);
+      }
+
+      h1 {
+        margin: 18px 0 18px;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        line-height: 0.96;
+        letter-spacing: -0.06em;
+      }
+
+      .highlight {
+        color: var(--primary);
+      }
+
+      .lead {
+        max-width: 640px;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 26px;
+      }
+
+      .btn-secondary {
+        background: rgba(255,255,255,0.02);
+        color: var(--text);
+        border-color: rgba(255,255,255,0.08);
+      }
+
+      .hero-panel {
+        background: linear-gradient(180deg, rgba(15, 28, 24, 0.95), rgba(8, 17, 15, 0.95));
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+      }
+
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .stat {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 18px 16px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.8rem;
+        margin-bottom: 4px;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .features {
+        padding: 42px 0 56px;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin: 0 0 14px;
+        letter-spacing: -0.05em;
+      }
+
+      .section-copy {
+        color: var(--muted);
+        max-width: 680px;
+        margin-bottom: 28px;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .feature-card {
+        background: rgba(13, 24, 22, 0.8);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 22px;
+      }
+
+      .icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: rgba(98, 247, 187, 0.08);
+        color: var(--primary);
+        font-size: 1.4rem;
+        margin-bottom: 14px;
+      }
+
+      .feature-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      footer {
+        padding: 22px 0 54px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .hero-inner,
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav class="nav" aria-label="Main navigation">
+          <div class="brand">Terra<span>reactor</span></div>
+          <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <a class="btn btn-primary" href="#contact">Get Started</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div>
+            <div class="eyebrow">Fresh launch</div>
+            <h1>Build <span class="highlight">faster</span> with cleaner systems.</h1>
+            <p class="lead">
+              Terrareactor helps teams move from idea to execution with simpler workflows,
+              clearer automation, and a faster path to launch.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#features">Explore Platform</a>
+              <a class="btn btn-secondary" href="#about">Learn More</a>
+            </div>
+          </div>
+
+          <div class="hero-panel" aria-label="Platform metrics">
+            <div style="font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">System overview</div>
+            <div class="stat-grid">
+              <div class="stat">
+                <strong>2.8x</strong>
+                <span>Faster delivery</span>
+              </div>
+              <div class="stat">
+                <strong>146%</strong>
+                <span>Workflow lift</span>
+              </div>
+              <div class="stat">
+                <strong>24/7</strong>
+                <span>Automation loop</span>
+              </div>
+              <div class="stat">
+                <strong>99.9%</strong>
+                <span>Reliability target</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features" id="features">
+        <div class="container">
+          <h2 class="section-title">Built for momentum.</h2>
+          <p class="section-copy">
+            Move from rough ideas to repeatable execution with a streamlined operating model.
+          </p>
+
+          <div class="card-grid">
+            <article class="feature-card">
+              <div class="icon">⚡</div>
+              <h3>Rapid iteration</h3>
+              <p>Ship experiments quickly and refine with live feedback instead of waiting on slow cycles.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="icon">🧠</div>
+              <h3>Smarter automation</h3>
+              <p>Turn recurring work into dependable automation that keeps teams focused on high-impact tasks.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="icon">🛡️</div>
+              <h3>Clear governance</h3>
+              <p>Keep systems visible, accountable, and safe with structured decisions and measurable outcomes.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact">
+      <div class="container">
+        Contact: hello@terrareactor.example
+      </div>
+    </footer>
+  </body>
+</html>
+
